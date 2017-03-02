@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.order(created_at: :desc)
   end
   
-  
   def new
     @user = User.new
   end
@@ -19,6 +18,20 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = "Updated your Plofile"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
 
   private
 
@@ -26,4 +39,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
   end
+  
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to root_path if @user != current_user
+  end
+  
 end
