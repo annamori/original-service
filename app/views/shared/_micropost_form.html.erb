@@ -1,6 +1,8 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
+<dr>
+<div class="well well-lg">
   <div class="field">
     <%= f.select :genre, ["チケット", "その他"], include_blank: true, placeholder: "ジャンルを選択" %>
   </div>
@@ -27,6 +29,7 @@
 　　<%= f.file_field :image3 %>
 　　<%= f.hidden_field :image3_cache %>
 　</div>
+</div>
 
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>
