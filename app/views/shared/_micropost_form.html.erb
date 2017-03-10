@@ -1,7 +1,32 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field">
+    <%= f.select :genre, ["チケット", "その他"], include_blank: true, placeholder: "ジャンルを選択" %>
+  </div>
+  
   <div class="field">
     <%= f.text_area :content, placeholder: "Compose new micropost..." %>
   </div>
+
+  <div class="field">
+　　<%= f.label :image1 %>
+　　<%= image_tag @micropost.image1.thumb.url if @micropost.image1? %>
+　　<%= f.file_field :image1 %>
+　　<%= f.hidden_field :image1_cache %>
+　</div>
+  <div class="field">
+　　<%= f.label :image2 %>
+　　<%= image_tag @micropost.image2.thumb.url if @micropost.image2? %>
+　　<%= f.file_field :image2 %>
+　　<%= f.hidden_field :image2_cache %>
+　</div>
+  <div class="field">
+　　<%= f.label :image3 %>
+　　<%= image_tag @micropost.image3.thumb.url if @micropost.image3? %>
+　　<%= f.file_field :image3 %>
+　　<%= f.hidden_field :image3_cache %>
+　</div>
+
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

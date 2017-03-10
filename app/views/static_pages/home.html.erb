@@ -8,6 +8,21 @@
         <%= render 'shared/micropost_form' %>
       </section>
     </aside>
+    <div class="col-md-8">
+      <h3>新着順</h3>
+      <% if @microposts.any? %>
+        <%= search_form_for @q do |f| %>
+          <%= f.label :content_cont, "入力の文字を含む" %>
+          <%= f.search_field :content_cont %>
+          <%= f.label :genre_cont, "チケットorその他を選んで下さい" %>
+          <%= f.select :genre_cont, ["チケット", "その他"] %>
+          <%= f.submit %>
+        <% end %>
+        <ol class="microposts">
+          <%= render @microposts %>
+        </ol>
+      <% end %>
+    </div>
   </div>
 <% else %>
   <div class="center jumbotron">

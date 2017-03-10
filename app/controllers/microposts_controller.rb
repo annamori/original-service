@@ -1,12 +1,24 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create]
 
+  def index
+    @micropost = current_user.microposts.build
+    microposts = Micropost.where(original_micropost_id: nil, original_user_id: nil).order(created_at: :desc)
+    @q        = microposts.search(params[:q])
+    @microposts = @q.result(distinct: true)
+    render 'static_pages/home'
+  end
+
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "Micropost created!"
       redirect_to root_url
     else
+      @micropost = current_user.microposts.build
+      microposts = Micropost.where(original_micropost_id: nil, original_user_id: nil).order(created_at: :desc)
+      @q        = microposts.search(params[:q])
+      @microposts = @q.result(distinct: true)
       render 'static_pages/home'
     end
   end
@@ -22,6 +34,7 @@ class MicropostsController < ApplicationController
   
   private
   def micropost_params
-    params.require(:micropost).permit(:content)
+    params.require(:micropost).permit(:content, :genre, :image1, :image2, :image3,
+                                      :image1_cache, :image2_cache, :image3_cache)
   end
 end
