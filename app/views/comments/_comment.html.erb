@@ -1,0 +1,10 @@
+<li>
+  <div class="row">
+    <div class='col-sm-offset-1 col-sm-8'>
+      <%= simple_format(comment.text) %>
+    </div>
+    <div class='col-sm-3'>
+      <%= image_tag comment.image.url, style: "max-width: 100%;" if comment.image? %>
+    </div>
+  </div>
+</li><hr>

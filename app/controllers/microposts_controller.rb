@@ -1,9 +1,15 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create]
 
+  def show
+    @micropost = Micropost.find(params[:id])
+    @comments = Comment.where(micropost_id: @micropost.id).order(created_at: :desc)
+    @comment = current_user.comments.build
+  end
+
   def index
     @micropost = current_user.microposts.build
-    microposts = Micropost.where(original_micropost_id: nil, original_user_id: nil).order(created_at: :desc)
+    microposts = Micropost.all.order(created_at: :desc)
     @q        = microposts.search(params[:q])
     @microposts = @q.result(distinct: true)
     render 'static_pages/home'
@@ -16,9 +22,10 @@ class MicropostsController < ApplicationController
       redirect_to root_url
     else
       @micropost = current_user.microposts.build
-      microposts = Micropost.where(original_micropost_id: nil, original_user_id: nil).order(created_at: :desc)
+      microposts = Micropost.all.order(created_at: :desc)
       @q        = microposts.search(params[:q])
       @microposts = @q.result(distinct: true)
+      flash.now[:danger] = "投稿に失敗しました"
       render 'static_pages/home'
     end
   end
@@ -28,13 +35,14 @@ class MicropostsController < ApplicationController
     return redirect_to root_url if @micropost.nil?
     @micropost.destroy
     flash[:success] = "Micropost deleted"
-    redirect_to request.referrer || root_url
+    redirect_to root_url
   end
 
   
   private
   def micropost_params
     params.require(:micropost).permit(:content, :genre, :image1, :image2, :image3,
-                                      :image1_cache, :image2_cache, :image3_cache)
+                                      :image1_cache, :image2_cache, :image3_cache,
+                                      :give, :take)
   end
 end

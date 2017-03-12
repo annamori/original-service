@@ -4,7 +4,8 @@
   <div class="panel panel-default">
   <div class="panel-heading">
    <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
-   <span class="user"><%= link_to micropost.user.name, micropost.user %>　さんの投稿</span><br><br>
+   <span class="user"><%= link_to micropost.user.name, micropost.user %>　さんの投稿</span>
+   <span><%= link_to "スレッドを見る", micropost, class: 'btn btn-danger' unless params[:controller] == "microposts" && params[:action] == "show"%></span><br><br>
   </div>
   
   <div class="panel-body">
@@ -12,7 +13,15 @@
   
   <div class="panel panel-default">
    <div class="panel-body">
-    <p>詳細</p>
+    <p>譲る</p>
+      <div style="border: 1px solid #eee"><%= simple_format(micropost.give) %>
+    </div>
+    
+    <p>求む</p>
+    <div style="border: 1px solid #eee"><%= simple_format(micropost.take) %>
+    </div>
+
+    <p>コメント</p>
     <div style="border: 1px solid #eee"><%= simple_format(micropost.content) %>
     </div>
    </div>

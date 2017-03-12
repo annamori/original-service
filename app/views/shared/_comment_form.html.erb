@@ -1,0 +1,15 @@
+<%= form_for(@responce) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+   <div class="field">
+    <p>コメント</p>
+    <%= f.text_area :content, placeholder: "補足説明や交換方法の希望などを記入してください" %>
+  </div>
+
+  <p>※注意※</p>
+  <p>・金銭のやり取りはしないでください。トラブル等が発生しても、当サイトは責任を負いかねます。</p>
+  <br>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+</div>
+
+<% end %>

@@ -11,19 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304082328) do
+ActiveRecord::Schema.define(version: 20170311175603) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "micropost_id"
+    t.text     "text"
+    t.string   "image"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "comments", ["micropost_id"], name: "index_comments_on_micropost_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "microposts", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "original_micropost_id"
-    t.integer  "original_user_id"
     t.string   "genre"
     t.string   "image1"
     t.string   "image2"
     t.string   "image3"
     t.text     "content"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.text     "give"
+    t.text     "take"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"

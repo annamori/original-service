@@ -4,11 +4,23 @@
 <dr>
 <div class="well well-lg">
   <div class="field">
+    <p>ジャンルの選択</p>
     <%= f.select :genre, ["チケット", "その他"], include_blank: true, placeholder: "ジャンルを選択" %>
   </div>
   
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <p>譲るアイテム</p>
+    <%= f.text_area :give, placeholder: "あなたが持っているアイテムの詳細を記入してください" %>
+  </div>
+  
+  <div class="field">
+    <p>求めるアイテム</p>
+    <%= f.text_area :take, placeholder: "交換したいアイテムの詳細を記入してください" %>
+  </div>
+  
+   <div class="field">
+    <p>コメント</p>
+    <%= f.text_area :content, placeholder: "補足説明や交換方法の希望などを記入してください" %>
   </div>
 
   <div class="field">
@@ -29,7 +41,11 @@
 　　<%= f.file_field :image3 %>
 　　<%= f.hidden_field :image3_cache %>
 　</div>
+
+  <p>※注意※</p>
+  <p>・金銭のやり取りはしないでください。トラブル等が発生しても、当サイトは責任を負いかねます。</p>
+  <br>
+  <%= f.submit "Post", class: "btn btn-primary" %>
 </div>
 
-  <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

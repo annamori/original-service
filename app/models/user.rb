@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   has_many :microposts
+  has_many :comments
   validates :location, allow_blank: true, 
                     length: { minimum: 2, maximum: 20 }
+                    
   has_many :following_relationships, class_name:  "Relationship",
                                      foreign_key: "follower_id",
                                      dependent:   :destroy
@@ -19,18 +21,15 @@ class User < ActiveRecord::Base
                                     dependent:   :destroy
   has_many :follower_users, through: :follower_relationships, source: :follower
   
-   # 他のユーザーをフォローする
   def follow(other_user)
     following_relationships.find_or_create_by(followed_id: other_user.id)
   end
 
-  # フォローしているユーザーをアンフォローする
   def unfollow(other_user)
     following_relationship = following_relationships.find_by(followed_id: other_user.id)
     following_relationship.destroy if following_relationship
   end
 
-  # あるユーザーをフォローしているかどうか？
   def following?(other_user)
     following_users.include?(other_user)
   end
