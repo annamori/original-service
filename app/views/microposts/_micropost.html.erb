@@ -3,7 +3,13 @@
   
   <div class="panel panel-default">
   <div class="panel-heading">
-   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+   <% if micropost.user.image? %>
+    <%= image_tag( micropost.user.image.url, :size => "50x50")  %>
+   <% else %>
+    <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+   <% end %>   
+   <%#= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+   
    <span class="user"><%= link_to micropost.user.name, micropost.user %>　さんの投稿</span>
    <span><%= link_to "スレッドを見る", micropost, class: 'btn btn-danger' unless params[:controller] == "microposts" && params[:action] == "show"%></span><br><br>
   </div>
