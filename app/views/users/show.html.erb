@@ -5,20 +5,36 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      
-    <div class="panel panel-default">
+    <br>
+    <div class="panel panel-info">
+     <div class="panel-heading">
+       <h3 class="panel-title">自己紹介</h3>
+     </div>
      <div class="panel-body">
-      <h4>年齢：<%= @user.age %>歳</h4>
-      <h4>所在地：<%= @user.location %></h4>
-      <h4>性別：<%= @user.gender %></h4>
-      <h4>自己紹介：<%= @user.introduction %></h4>
+       
+       <% if @user.age %>
+        <h4>年齢：<%= @user.age %>歳</h4>
+       <% end %>
+       
+       <% if @user.location %>
+        <h4>所在地：<%= @user.location %></h4>
+       <% end %>
+       
+       <% if @user.gender %>
+        <h4>性別：<%= @user.gender %></h4>
+       <% end %>
+       
+       <% if @user.introduction %>
+        <h4>自己紹介：<%= @user.introduction %></h4>
+       <% end %>
+       
      </div>
     </div>
     
     </section>
   </aside>
   <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
+    <%#= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>投稿 (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
