@@ -1,0 +1,65 @@
+  <br>
+  
+  <div class="panel panel-default">
+  <div class="panel-heading">
+   <% if micropost.user.image? %>
+    <%= image_tag( micropost.user.image.url, :size => "50x50")  %>
+   <% else %>
+    <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+   <% end %>   
+   <%#= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+   
+   <span class="user"><%= link_to micropost.user.name, micropost.user %>　さんの投稿</span>
+   <span><%= link_to "スレッドを見る", micropost, class: 'btn btn-danger' unless params[:controller] == "microposts" && params[:action] == "show"%></span><br><br>
+  </div>
+  
+  <div class="panel-body">
+   <span class="genre">ジャンル：<%= micropost.genre %>情報</span><br><br>
+  
+       <div class="panel panel-info">
+           <div class="panel-heading">
+               譲る
+           </div>
+           <div class="panel-body">
+                <%= simple_format(micropost.give) %>
+           </div>
+       </div>
+
+       <div class="panel panel-info">
+           <div class="panel-heading">
+            求む
+            </div>
+           <div class="panel-body">
+                <%= simple_format(micropost.take) %>
+           </div>
+       </div>
+       <div class="panel panel-info">
+           <div class="panel-heading">
+           コメント
+           </div>
+           <div class="panel-body">
+　              <%= simple_format(micropost.content) %>
+           </div>
+       </div>
+
+   <div class="row">
+     <div class='col-sm-4'>
+　　   <%= image_tag micropost.image1.url, style: "width: 100%;" if micropost.image1? %>
+　 　</div>
+     <div class='col-sm-4'>
+　　   <%= image_tag micropost.image2.url, style: "width: 100%;" if micropost.image2? %>
+　 　</div>
+     <div class='col-sm-4'>
+　 　  <%= image_tag micropost.image3.url, style: "width: 100%;" if micropost.image3? %>
+　 　</div>
+　 </div>
+　
+   <div class="timestamp" style="float: right;">
+     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+     <% if current_user == micropost.user %>
+       <%= link_to "delete", micropost, method: :delete,
+                                        data: { confirm: "You sure?" } %>
+     <% end %>
+   </div>
+  </div>
+  </div>
