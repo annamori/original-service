@@ -1,0 +1,35 @@
+<h1>
+      <% if user.image? %>
+       <%= image_tag( user.image.url, :size => "70x70")  %>
+      <% else %>
+       <%= link_to gravatar_for(user, size: 70), user %>
+      <% end %>   
+        <%#= gravatar_for @user %>
+        
+        <%= link_to user.name, user %>
+      </h1>
+    <br>
+    <div class="panel panel-info">
+     <div class="panel-heading">
+       <h3 class="panel-title">自己紹介</h3>
+     </div>
+     <div class="panel-body">
+       
+       <% if user.age %>
+        <h4>年齢：<%= user.age %>歳</h4>
+       <% end %>
+       
+       <% if user.location %>
+        <h4>所在地：<%= user.location %></h4>
+       <% end %>
+       
+       <% if user.gender %>
+        <h4>性別：<%= user.gender %></h4>
+       <% end %>
+       
+       <% if user.introduction %>
+        <h4>自己紹介：<%= user.introduction %></h4>
+       <% end %>
+       
+     </div>
+    </div>
