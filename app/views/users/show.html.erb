@@ -5,6 +5,16 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      
+    <div class="panel panel-default">
+     <div class="panel-body">
+      <h4>年齢：<%= @user.age %>歳</h4>
+      <h4>所在地：<%= @user.location %></h4>
+      <h4>性別：<%= @user.gender %></h4>
+      <h4>自己紹介：<%= @user.introduction %></h4>
+     </div>
+    </div>
+    
     </section>
   </aside>
   <div class="col-md-8">

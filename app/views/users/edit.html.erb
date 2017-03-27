@@ -1,22 +1,35 @@
-<h1>edit</h1>
+<h1>プロフィール編集</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %> 
-      <%= f.label :name %>
+      <%= f.label :name,"名前" %>
       <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
+      
+      <%= f.label :location,"所在地" %>
+      <%= f.text_field :location, class: 'form-control' %>
+      
+      <%= f.label :age,"年齢" %>
+      <%= f.number_field :age, class: 'form-control' %>
+      
+      <%= f.label :gender,"性別" %>
+      <%= f.select :gender, ["男性", "女性"], {}, { class: 'form-control'} %>
+      
+      <%= f.label :intoroduction,"自己紹介" %>
+      <%= f.text_field :introduction, class: 'form-control' %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.label :password_confirmation, "もう一度パスワードを入力してください" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+      <br>
+      <%= f.submit "更新", class: "btn btn-primary" %>
+      <br>
     <% end %>
   </div>
 </div>
