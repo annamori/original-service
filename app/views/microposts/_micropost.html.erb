@@ -11,21 +11,31 @@
   <div class="panel-body">
    <span class="genre">ジャンル：<%= micropost.genre %>情報</span><br><br>
   
-  <div class="panel panel-default">
-   <div class="panel-body">
-    <p>譲る</p>
-      <div style="border: 1px solid #eee"><%= simple_format(micropost.give) %>
-    </div>
-    
-    <p>求む</p>
-    <div style="border: 1px solid #eee"><%= simple_format(micropost.take) %>
-    </div>
+       <div class="panel panel-info">
+           <div class="panel-heading">
+               譲る
+           </div>
+           <div class="panel-body">
+                <%= simple_format(micropost.give) %>
+           </div>
+       </div>
 
-    <p>コメント</p>
-    <div style="border: 1px solid #eee"><%= simple_format(micropost.content) %>
-    </div>
-   </div>
-  </div>
+       <div class="panel panel-info">
+           <div class="panel-heading">
+            求む
+            </div>
+           <div class="panel-body">
+                <%= simple_format(micropost.take) %>
+           </div>
+       </div>
+       <div class="panel panel-info">
+           <div class="panel-heading">
+           コメント
+           </div>
+           <div class="panel-body">
+　              <%= simple_format(micropost.content) %>
+           </div>
+       </div>
 
    <div class="row">
      <div class='col-sm-4'>
